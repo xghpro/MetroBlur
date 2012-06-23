@@ -33,5 +33,20 @@ namespace MetroBlur
                 App.ViewModel.LoadData();
             }
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void LoginButton_Tap(object sender, GestureEventArgs e)
+        {
+            NewsBlurAPI.Auth.Login("thuringia", "R100410K");
+        }
+
+        private void GetFeedsButton_Tap(object sender, GestureEventArgs e)
+        {
+
+        }
     }
 }
