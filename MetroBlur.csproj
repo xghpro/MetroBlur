@@ -52,6 +52,9 @@
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="RestSharp.WindowsPhone">
+      <HintPath>packages\RestSharp.103.1\lib\sl4-wp71\RestSharp.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -69,6 +72,7 @@
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FeedItem.cs" />
     <Compile Include="NewsBlurAPI\Auth.cs" />
+    <Compile Include="NewsBlurAPI\Feeds.cs" />
     <Compile Include="PivotPage1.xaml.cs">
       <DependentUpon>PivotPage1.xaml</DependentUpon>
     </Compile>
