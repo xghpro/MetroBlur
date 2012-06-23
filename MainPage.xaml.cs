@@ -46,7 +46,7 @@ namespace MetroBlur
 
         private void GetFeedsButton_Tap(object sender, GestureEventArgs e)
         {
-
+            NewsBlurAPI.Feeds.GetFeeds();
         }
     }
 }

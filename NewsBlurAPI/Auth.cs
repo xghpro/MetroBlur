@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using RestSharp;
 
 namespace MetroBlur.NewsBlurAPI
 {
@@ -19,12 +20,12 @@ namespace MetroBlur.NewsBlurAPI
     /// </summary>
     public class Auth
     {
-        static string BaseURL = "http://newsblur.com/api/";
+        static RestClient client = new RestClient("http://newsblur.com/api/");
 
         /// <summary>
         /// Contains user credentials
         /// </summary>
-        private class AuthInfo
+        public class AuthInfo
         {
             public string username { get; set; }
             public string password { get; set; }
@@ -46,34 +47,27 @@ namespace MetroBlur.NewsBlurAPI
             else
             {
                 // Check for password, if not password provided, ommit it in the request
-                JObject parameters;
+                AuthInfo info;
                 if (passwd == String.Empty)
                 {
-                    parameters = JObject.FromObject(
-                        new AuthInfo
-                        {
-                            username = usrname
-                        });
+                    info = new AuthInfo { username = usrname };
                 }
                 else
                 {
-                    parameters = JObject.FromObject(
-                        new AuthInfo
+                    info = new AuthInfo
                         {
                             username = usrname,
                             password = passwd
-                        });
+                        };
                 }
 
-                WebClient wc = new WebClient();
-                wc.UploadStringAsync(new Uri((BaseURL + "login")), "POST", parameters.ToString());
-                wc.UploadStringCompleted += new UploadStringCompletedEventHandler(wc_loginComplete);
+                RestRequest request = new RestRequest("login", Method.POST);
+                request.AddObject(info);
+                client.ExecuteAsync(request, response =>
+                {
+                    Debug.WriteLine(response.Content);
+                });
             }
-        }
-
-        static void wc_loginComplete(object sender, UploadStringCompletedEventArgs e)
-        {
-            Debug.WriteLine("Web service says: " + e.Result);
         }
     }
 
